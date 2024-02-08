@@ -1,0 +1,71 @@
+def sum1(nums, target):
+2    indices1 = {} 
+3    for i, num in enumerate(nums):
+4        complement = target - num
+5        if complement in indices1:
+6            return [indices1
+7            [complement], i]
+8        indices1[num] = i
+9    return None
+10nums = list(map(int, input("Enter the array of integers: ").split()))
+
+13target = int(input("Enter the target sum: "))
+14result = sum1(nums, target)
+15if result:
+16    print(f"The indices of the two numbers that add up to the target are: {result}")
+17else:
+18    print("No solution found.")
+
+
+
+
+
+Java: 
+
+import java.util.HashMap;
+
+public class TwoSum {
+    public int[] twoSum(int[] nums, int target) {
+        HashMap<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            int complement = target - nums[i];
+            if (map.containsKey(complement)) {
+                return new int[] { map.get(complement), i };
+            }
+            map.put(nums[i], i);
+        }
+        throw new IllegalArgumentException("No two sum solution");
+    }
+
+    public static void main(String[] args) {
+        TwoSum solution = new TwoSum();
+        int[] nums = { 2, 7, 11, 15 };
+        int target = 9;
+        int[] indices = solution.twoSum(nums, target);
+        System.out.println("Indices: " + indices[0] + ", " + indices[1]);
+    }
+}
+
+
+
+
+
+
+Python Solution:
+create an empty list to keep track of numbers 
+go through each number on the list one by one. 
+calculate the missing number
+check the missing number 
+look out lost and see if we have seen the missing number before 
+if we have seen the missing number before that mean we have found the pair 
+if we have not then we remember the current number by addinf to the list 
+we repeat the process untill we find the two number that add up to the target.
+
+
+Java solution:
+use hashmap instead of list 
+go through each number one by one 
+calculate what number would make the current number add up to the target 
+if missing number in hashmap that mean we have found the pair of number
+if we have not find the number then we remember the current number by addinf to the hashmap
+we repeat the process untill we find the two number that add up to the target.
