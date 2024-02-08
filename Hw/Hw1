@@ -1,0 +1,62 @@
+def is_palindrome(s):
+
+   cleaned_s = ''.join(char.lower() for char in s if char.isalnum())
+   
+
+   return cleaned_s == cleaned_s[::-1]
+
+
+input_string = "A man, a plan, a canal, Panama!"
+result = is_palindrome(input_string)
+
+if result:
+  print(f'The string "{input_string}" is a palindrome.')
+else:
+   print(f'The string "{input_string}" is not a palindrome.')
+
+
+
+
+
+public class PalindromeChecker {
+    public boolean isPalindrome(String s) {
+        String cleanedS = s.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
+        int left = 0, right = cleanedS.length() - 1;
+        while (left < right) {
+            if (cleanedS.charAt(left) != cleanedS.charAt(right)) {
+                return false;
+            }
+            left++;
+            right--;
+        }
+        return true;
+    }
+
+    public static void main(String[] args) {
+        PalindromeChecker checker = new PalindromeChecker();
+        String inputString = "A man, a plan, a canal, Panama!";
+        boolean result = checker.isPalindrome(inputString);
+        
+        if (result) {
+            System.out.println("The string \"" + inputString + "\" is a palindrome.");
+        } else {
+            System.out.println("The string \"" + inputString + "\" is not a palindrome.");
+        }
+    }
+}
+
+
+Python solution
+Convert the input string to lowercase
+Remove non-alphanumeric characters
+cleaned string with its reverse
+If  cleaned string is equal reverse then the input string is a palindrome.
+return true. 
+
+Java solution:
+Convert the input string to lowercase
+use replaceAll method to remove non alphanumeric char
+compare char from beging to end of clean string 
+if the character dont match the string is not plindrome 
+
+
