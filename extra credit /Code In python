@@ -1,0 +1,12 @@
+def fibonacci(n):
+    memo = {}
+
+    def fib_helper(n):
+        if n <= 1:
+            return n
+        if n not in memo:
+            memo[n] = fib_helper(n - 1) + fib_helper(n - 2)
+        return memo[n]
+
+    return fib_helper(n)
+    print(f"The {n}th Fibonacci number is: {fibonacci(n)}")
