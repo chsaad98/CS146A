@@ -1,0 +1,23 @@
+Python code:
+
+import heap
+def minMeetingRooms(intervals: list[list[int]])
+    if not intervals:
+        return 0
+        
+    intervals.sort(key=lambda x: x[0])
+        
+    end_times = []
+    heap.heappush(end_times, intervals[0][1])
+        
+    for interval in intervals[1:]:
+        if interval[0] >= end_times[0]:
+            heap.heappop(end_times)
+        heapq.heappush(end_times, interval[1])
+        
+    return len(end_times)
+    
+intervals1 = [[0, 30], [5, 10], [15, 20]]
+intervals2 = [[0, 1], [1, 2], [2, 3]]
+print(minMeetingRooms(intervals1))
+print(minMeetingRooms(intervals2))
