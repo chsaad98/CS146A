@@ -1,0 +1,21 @@
+class TreeNode {
+   int val;
+   TreeNode left;
+   TreeNode right;
+   TreeNode(int x) { val = x; }
+}
+public class BinaryTreeValidator {
+   public boolean isValidLeftSubtree(TreeNode root) {
+       return validate(root, null, null);
+   }
+   private boolean validate(TreeNode node, Integer lower, Integer upper) {
+       if (node == null) return true;
+       
+       int val = node.val;
+       if (lower != null && val <= lower) return false;
+       if (upper != null && val >= upper) return false;
+       if (!validate(node.right, val, upper)) return false;
+       if (!validate(node.left, lower, val)) return false;
+       return true;
+   }
+}
