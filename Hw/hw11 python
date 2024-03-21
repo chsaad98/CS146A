@@ -16,7 +16,6 @@ class Solution:
 
         return image
 
-# Example usage:
 image = [
     [1, 1, 1],
     [1, 1, 0],
