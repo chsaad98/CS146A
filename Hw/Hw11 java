@@ -1,0 +1,27 @@
+import java.util.*;
+
+class Solution {
+    public int[][] floodFill(int[][] image, int sr, int sc, int newColor) {
+        int originalColor = image[sr][sc];
+        if (originalColor == newColor) {
+            return image;
+        }
+        Stack<int[]> stack = new Stack<>();
+        stack.push(new int[]{sr, sc});
+
+        while (!stack.isEmpty()) {
+            int[] current = stack.pop();
+            int r = current[0];
+            int c = current[1];
+            if (image[r][c] == originalColor) {
+                image[r][c] = newColor;
+                if (r - 1 >= 0) stack.push(new int[]{r - 1, c});
+                if (r + 1 < image.length) stack.push(new int[]{r + 1, c}); 
+                if (c - 1 >= 0) stack.push(new int[]{r, c - 1}); 
+                if (c + 1 < image[0].length) stack.push(new int[]{r, c + 1}); 
+            }
+        }
+
+        return image;
+    }
+}
