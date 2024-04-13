@@ -1,0 +1,27 @@
+def courses(num_courses, prerequisites):
+    indegrees = [0] * num_courses
+    adjacency = defaultdict(list)
+    
+    for course, prereq in prerequisites:
+        adjacency[prereq].append(course)
+        indegrees[course] += 1
+        
+    visited_count = 0
+    while queue:
+        current_course = queue.popleft()
+        visited_count += 1
+        for next_course in adjacency[current_course]:
+            indegrees[next_course] -= 1
+            if indegrees[next_course] == 0:
+                queue.append(next_course)
+    
+    return visited_count == num_courses
+
+def run_test_cases():
+    result1 = courses(2, [[1, 0]])
+    print("Test case 1: ", result1)
+
+    result2 = courses(2, [[1, 0], [0, 1]])
+    print("Test case 2: ", result2)
+
+run_test_cases()
