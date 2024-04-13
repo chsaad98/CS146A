@@ -1,0 +1,26 @@
+def canFinish(numCourses, prerequisites):
+    indegrees = [0] * numCourses
+    adjacency = defaultdict(list)
+
+    for ai, bi in prerequisites:
+        adjacency[bi].append(ai)
+        indegrees[ai] += 1
+
+    visited_count = 0
+    while queue:
+        current_course = queue.popleft()
+        visited_count += 1
+        for neighbor in adjacency[current_course]:
+            indegrees[neighbor] -= 1
+            if indegrees[neighbor] == 0:
+                queue.append(neighbor)
+
+    return visited_count == numCourses
+
+numCourses1 = 2
+prerequisites1 = [[1, 0]]
+print(canFinish(numCourses1, prerequisites1))  
+
+numCourses2 = 2
+prerequisites2 = [[1, 0], [0, 1]]
+print(canFinish(numCourses2, prerequisites2)) 
