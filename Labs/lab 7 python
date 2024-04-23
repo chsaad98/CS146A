@@ -1,0 +1,28 @@
+def findTheCity(n, edges, distanceThreshold):
+  adj_matrix = [[0] * n for _ in range(n)]
+  for from to weight in edges:
+    adj_matrix[from_][to] = weight
+    adj_matrix[to][from_] = weight 
+
+  for k in range(n):
+    for i in range(n):
+      for j in range(n):
+        adj_matrix[i][j] = min(adj_matrix[i][j], adj_matrix[i][k] + adj_matrix[k][j])
+
+  reachable_cities = [0] * n
+  for i in range(n):
+    for j in range(n):
+      if adj_matrix[i][j] <= distanceThreshold and i != j:
+        reachable_cities[i] += 1
+
+  min_reachable = float('inf')
+  best_city = -1
+  for i in range(n):
+    if reachable_cities[i] <= min_reachable and reachable_cities[i] > 0: 
+      if reachable_cities[i] < min_reachable:
+        min_reachable = reachable_cities[i]
+        best_city = i
+    elif reachable_cities[i] == min_reachable and i > best_city:
+        best_city = i
+
+    return best_city
