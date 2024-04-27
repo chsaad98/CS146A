@@ -1,0 +1,61 @@
+import java.util.*;
+
+class Solution {
+    private int bfs(int node, Map<Integer, List<int[]>> adj, int maximum) {
+        PriorityQueue<int[]> heap = new PriorityQueue<>((a, b) -> a[0] - b[0]);
+        heap.offer(new int[]{0, node, -1});
+        Set<Integer> visited = new HashSet<>();
+       while (!heap.isEmpty()) {
+            int[] current = heap.poll();
+            int distance = current[0];
+            int curr = current[1];
+            int parent = current[2];
+
+            if (distance > maximum) {
+                continue;
+            }
+            if (visited.contains(curr)) {
+                continue;
+            }
+
+            visited.add(curr);
+
+            for (int[] next : adj.get(curr)) {
+                int nextt = next[0];
+                int price = next[1];
+                if (nextt != parent) {
+                    heap.offer(new int[]{distance + price, nextt, curr});
+                }
+            }
+        }
+
+        return visited.size() - 1;
+    }
+
+    public int findTheCity(int n, int[][] edges, int distanceThreshold) {
+        Map<Integer, List<int[]>> adj = new HashMap<>();
+        int[] arr = new int[n];
+        for (int[] edge : edges) {
+            int node1 = edge[0];
+            int node2 = edge[1];
+            int price = edge[2];
+            adj.computeIfAbsent(node1, k -> new ArrayList<>()).add(new int[]{node2, price});
+            adj.computeIfAbsent(node2, k -> new ArrayList<>()).add(new int[]{node1, price});
+        }
+        for (int i = 0; i < n; i++) {
+            int done = bfs(i, adj, distanceThreshold);
+            arr[i] = done;
+        }
+
+        int minNode = Integer.MAX_VALUE;
+        int minCities = Integer.MAX_VALUE;
+        for (int i = 0; i < n; i++) {
+            if (arr[i] <= minCities && i <= minNode) {
+                minCities = arr[i];
+                minNode = i;
+            }
+        }
+
+        return minNode;
+    }
+}
